@@ -1,0 +1,424 @@
+# Task: Build a Social-Media-Focused Dataset for the Corporate Bullshit Detector™
+
+Create an English-language dataset for an experimental AI/ML project called **Corporate Bullshit Detector™**.
+
+The detector is primarily intended for **corporate and professional social-media communication, especially LinkedIn**.
+
+Typical target texts include:
+
+- corporate LinkedIn posts
+- founder / CEO / executive LinkedIn posts
+- startup announcements
+- product-launch posts
+- AI / technology hype posts
+- consulting thought leadership
+- professional “visionary” posts
+- company updates
+- corporate marketing posts
+
+A smaller number of press releases and corporate website texts should remain in the dataset as comparison / out-of-domain examples.
+
+Do **not** generate classifier probabilities or bullshit scores.
+
+---
+
+## Dataset Size
+
+Create exactly **180 samples**.
+
+Target composition:
+
+- **126 synthetic samples (~70%)**
+- **54 real samples (~30%)**
+
+The dataset should be strongly focused on social-media-style communication.
+
+Approximately **75–80% of all samples should be LinkedIn/social-media style**.
+
+### Suggested distribution
+
+Synthetic:
+
+- ~100 LinkedIn / professional social-media style samples
+- ~26 press-release, corporate announcement, website, or related business communication samples
+
+Real:
+
+- ~40 authentic LinkedIn or other professional/social-media posts
+- ~14 authentic corporate website, press-release, startup announcement, or similar texts
+
+LinkedIn should be the primary real social-media source.
+
+Other public social-media platforms such as X may be used when useful and reliably accessible, but do not depend on them.
+
+---
+
+## Real Samples
+
+Use publicly accessible English-language posts and business communication.
+
+Prioritize real material from:
+
+- companies
+- startups
+- founders
+- CEOs
+- executives
+- consultants
+- technology leaders
+- professional corporate accounts
+
+Especially seek realistic examples covering:
+
+- AI hype
+- product announcements
+- corporate transformation
+- leadership
+- innovation
+- sustainability
+- future-of-work claims
+- consulting thought leadership
+- funding / growth announcements
+- ordinary factual company updates
+
+### Authenticity Requirement
+
+Every sample marked `real` must contain **authentic original wording from the public source**.
+
+Do not:
+
+- paraphrase
+- summarize
+- rewrite
+- recreate
+- imitate the source
+
+If a real post is too long, shorten it by selecting a relevant excerpt.
+
+You may remove irrelevant sections or select a shorter consecutive passage, but **do not rewrite wording within the selected excerpt**.
+
+Never generate synthetic text and attribute it to a real person or company.
+
+---
+
+## Synthetic Samples
+
+Synthetic samples should resemble **realistic LinkedIn and professional corporate communication**.
+
+Do not make them obvious satire.
+
+They should plausibly look like something a:
+
+- startup founder
+- CEO
+- executive
+- consultant
+- corporate communications team
+- AI company
+- large enterprise
+
+might genuinely post.
+
+Use synthetic samples particularly to control combinations of the four linguistic dimensions we want to study:
+
+1. Buzzword-heavy language
+2. Vague / formulaic corporate language
+3. Grandiose or implausible claims
+4. Concrete and specific information
+
+These dimensions must **not always correlate**.
+
+Generate examples such as:
+
+- very high buzzwords + high concrete information
+- high buzzwords + low grandiosity
+- high grandiosity + few buzzwords
+- vague but modest corporate language
+- highly concrete product announcements
+- marketing-heavy but informative posts
+- visionary but still plausible posts
+- factual low-hype business updates
+- bland, vague thought leadership
+- moderate corporate hype
+- concrete posts with measurable results
+- strong claims supported by real-looking specifics
+
+Some examples may be strongly exaggerated, especially around AI, technology, futurism, transformation, AGI, automation, productivity, disruption, or societal impact.
+
+However, extreme samples should remain **realistically plausible**. Think aggressive real-world startup/executive rhetoric, not parody-level nonsense.
+
+---
+
+## Difficulty and Balance
+
+The dataset should not make classification artificially easy.
+
+Do not create a simple split where:
+
+- synthetic = bullshit
+- real = factual
+- AI = bullshit
+- marketing = bullshit
+- buzzwords = bullshit
+
+Instead, deliberately create difficult and mixed examples.
+
+Approximately **25–30% of the entire dataset should be clearly substantive, concrete, and relatively low-hype**.
+
+Include meaningful numbers of ambiguous or mixed cases.
+
+Examples:
+
+- a LinkedIn product announcement containing genuine technical details but also heavy marketing language
+- a corporate post with almost no buzzwords but extremely vague claims
+- a highly ambitious founder post containing measurable evidence
+- a dry factual post with little marketing language
+- a consulting post that sounds polished but communicates very little
+- an AI announcement with buzzwords but also specific benchmarks or product details
+
+---
+
+## Text Length
+
+Most samples should resemble normal professional social-media posts.
+
+Typical length:
+
+**30–150 words**
+
+Include some shorter posts and a smaller number of longer examples up to approximately **200–250 words**.
+
+Avoid long-form articles, reports, or detailed blog posts.
+
+---
+
+## Industries
+
+AI and technology should be somewhat overrepresented because they are particularly relevant to the intended use case.
+
+However, include a broad mix of industries such as:
+
+- AI / technology
+- software / SaaS
+- finance
+- consulting
+- energy
+- sustainability
+- healthcare
+- manufacturing
+- retail
+- logistics
+- HR / leadership
+- consumer products
+- professional services
+
+Corporate bullshit should not become synonymous with technology language.
+
+---
+
+## Company / Author Types
+
+Include a mix of communication from or resembling:
+
+- early-stage startups
+- scale-ups
+- established technology companies
+- consultancies
+- large corporations / enterprises
+- founders
+- CEOs
+- senior executives
+- corporate communication teams
+
+---
+
+## Archetypes
+
+Use descriptive construction metadata to help inspect dataset diversity.
+
+Possible archetypes:
+
+- `extreme_buzzword_bingo`
+- `vague_corporate_speak`
+- `grandiose_claim`
+- `highly_concrete`
+- `marketing_but_substantive`
+- `buzzwords_but_concrete`
+- `vague_but_not_grandiose`
+- `grandiose_without_buzzwords`
+- `neutral_business_update`
+- `visionary_startup_claim`
+- `technical_product_update`
+- `consulting_thought_leadership`
+- `executive_vision_post`
+- `linkedin_product_launch`
+- `linkedin_company_update`
+
+You may introduce additional archetypes when useful.
+
+`archetype` is only dataset-construction metadata.
+
+It is **not ground truth** and must not be treated as a classifier label.
+
+---
+
+## Main CSV Schema
+
+Create:
+
+`corporate_bullshit_raw_dataset.csv`
+
+with exactly these columns and this order:
+
+```text
+id
+synthetic_or_real
+text
+source_type
+domain
+archetype
+```
+
+### Fields
+
+`id`
+
+Sequential identifier:
+
+```text
+CBS001
+CBS002
+...
+CBS180
+```
+
+`synthetic_or_real`
+
+Exactly:
+
+```text
+synthetic
+```
+
+or
+
+```text
+real
+```
+
+`text`
+
+The sample itself.
+
+For real rows, the wording must come from the original public source without paraphrasing.
+
+`source_type`
+
+Examples:
+
+```text
+linkedin_post
+x_post
+press_release
+product_announcement
+corporate_update
+thought_leadership
+executive_statement
+corporate_website
+```
+
+`domain`
+
+Examples:
+
+```text
+ai_tech
+software
+finance
+energy
+consulting
+healthcare
+retail
+manufacturing
+logistics
+hr_leadership
+```
+
+`archetype`
+
+One descriptive construction category.
+
+---
+
+## Real-Source Verification File
+
+Create a second private file:
+
+`corporate_bullshit_real_sources.csv`
+
+with:
+
+```text
+id
+source_url
+source_title
+company_or_author
+platform
+```
+
+This should contain one row for every real sample.
+
+For LinkedIn samples, preserve the public LinkedIn post URL whenever possible.
+
+This file is for private verification and will not necessarily be published with the project.
+
+---
+
+## Real-Sample Verification
+
+For every row marked `real`, verify:
+
+1. The source is genuinely public.
+2. The sample actually appears in that source.
+3. The wording has not been paraphrased.
+4. Any shortening preserves the original wording.
+5. The correct URL is recorded in the source file.
+6. The sample is genuinely social-media content when `source_type` says `linkedin_post` or `x_post`.
+7. Synthetic material has not accidentally been classified as real.
+
+Do not label a paraphrased summary as `real`.
+
+---
+
+## Quality Checks
+
+Before delivering the files, verify:
+
+1. Exactly **180 rows** exist.
+2. Approximately **126 are synthetic and 54 are real**.
+3. Approximately **75–80% of the entire dataset is social-media style**.
+4. Approximately **40 of the 54 real samples come from LinkedIn or comparable professional/social media**.
+5. No exact duplicates exist.
+6. Avoid obvious near-duplicates and template repetition.
+7. Multiple industries and company types are represented.
+8. Roughly **25–30% are substantive / concrete / relatively low-hype**.
+9. Buzzwords, vagueness, grandiosity, and concrete information occur in deliberately different combinations.
+10. Real samples have authentic source wording.
+11. CSV escaping works correctly for commas, quotation marks, apostrophes, emojis, and line breaks.
+12. Do not generate classifier scores, probabilities, overall bullshit labels, or ground-truth judgments.
+
+---
+
+## Deliverables
+
+Produce:
+
+1. `corporate_bullshit_raw_dataset.csv`
+2. `corporate_bullshit_real_sources.csv`
+3. A very short summary containing:
+   - synthetic / real counts
+   - LinkedIn / social-media counts
+   - major domains represented
+   - any limitations in sourcing authentic social-media posts
+
+The CSV files are the primary deliverables.
